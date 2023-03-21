@@ -1,0 +1,92 @@
+<div class="stepper">
+    <form [formGroup]="informationForm">
+        <mat-vertical-stepper linear #stepper>
+            <mat-step [stepControl]="formName">
+                <ng-template matStepLabel>Fill out your name</ng-template>
+                <form [formGroup]="formName" class="name">
+                    <mat-vertical-stepper linear>
+                        <mat-step [stepControl]="formFirstName">
+                            <ng-template matStepLabel>Your first name</ng-template>
+                            <form [formGroup]="formFirstName">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Name </mat-label>
+                                    <input matInput placeholder="First name" formControlName="firstName" required>
+                                </mat-form-field>
+                                <div>
+                                    <button mat-raised-button matStepperNext>Next</button>
+                                </div>
+                            </form>
+                        </mat-step>
+                        <mat-step [stepControl]="formLastName">
+                            <ng-template matStepLabel>Your last name</ng-template>
+                            <form [formGroup]="formLastName">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Name </mat-label>
+                                    <input matInput placeholder="Last name" formControlName="lastName" required>
+                                </mat-form-field>
+                                <div>
+                                    <button mat-raised-button matStepperPrevious>Back</button>
+                                    <button mat-raised-button matStepperNext>Next</button>
+                                </div>
+                            </form>
+                        </mat-step>
+                        <mat-step>
+                            <ng-template matStepLabel>Done</ng-template>
+                            <p>You are now done</p>
+                            <div>
+                                <button mat-raised-button matStepperPrevious>Back</button>
+                                <button mat-raised-button (click)="stepper.reset()">Reset</button>
+                            </div>
+                        </mat-step>
+                    </mat-vertical-stepper>
+                    <div>
+                        <button mat-raised-button matStepperNext>Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="formMajor">
+                <form [formGroup]="formMajor">
+                    <ng-template matStepLabel>Fill out your major</ng-template>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Major </mat-label>
+                        <input matInput placeholder="Your Major" formControlName="major" required>
+                    </mat-form-field>
+                    <div>
+                        <button mat-raised-button matStepperPrevious>Back</button>
+                        <button mat-raised-button matStepperNext>Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="formDog">
+                <ng-template matStepLabel>Do your have a dog?</ng-template>
+                <form [formGroup]="formDog">
+                    <div>
+                        <mat-radio-group formControlName="haveADog">
+                            <mat-radio-button value="yes">Yes</mat-radio-button> <br>
+                            <mat-radio-button value="no">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div *ngIf="this.formDog.get('haveADog')?.value === 'yes'">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Name your dog:</mat-label>
+                            <input matInput placeholder="Your dog" formControlName="nameDog">
+                        </mat-form-field>
+                    </div>
+                </form>
+                <div>
+                    <button mat-raised-button matStepperPrevious>Back</button>
+                    <button mat-raised-button matStepperNext >Next</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                <p>You are done</p>
+                <div>
+                    <button mat-raised-button matStepperPrevious>Back</button>
+                    <button mat-raised-button (click)="done()">Comfirm</button>
+                </div>
+            </mat-step>
+        </mat-vertical-stepper>
+    </form>
+
+</div>
